@@ -230,10 +230,23 @@ end
 function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   # Substep 1
   equation.calcN!(ts.RHS₁, sol, t, clock, vars, params, grid)
+  for i in 1:size(ts.RHS₁, 1)
+    for j in 1:size(ts.RHS₁, 2)
+      @print("RHS[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
+    end
+    @printf("\n")
+  end
+  @printf("\n")
   addlinearterm!(ts.RHS₁, equation.L, sol)
-  @printf("THISHS WORKED!!!!!!!!!!")
-
-  
+  @printf("______________________________________After!!!!")
+  for i in 1:size(ts.RHS₁, 1)
+    for j in 1:size(ts.RHS₁, 2)
+      @print("RHS_A[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
+    end
+    @printf("\n")
+  end
+  @printf("\n")
+    
   # Substep 2
   substepsol!(ts.sol₁, sol, ts.RHS₁, dt/2)
   equation.calcN!(ts.RHS₂, ts.sol₁, t+dt/2, clock, vars, params, grid)
