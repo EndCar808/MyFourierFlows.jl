@@ -231,18 +231,10 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   # Substep 1
   equation.calcN!(ts.RHS₁, sol, t, clock, vars, params, grid)
   @printf("t = %1.5f\n", clock.t)
-  for i in 1:size(ts.RHS₁, 1)
-    for j in 1:size(ts.RHS₁, 2)
-      @printf("RHS_M[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
-    end
-    @printf("\n")
-  end
-  @printf("\n")
   addlinearterm!(ts.RHS₁, equation.L, sol)
-  @printf("______________________________________After!!!!\n")
   for i in 1:size(ts.RHS₁, 1)
     for j in 1:size(ts.RHS₁, 2)
-      @printf("RHS_A[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
+      @printf("RHS1[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
     end
     @printf("\n")
   end
@@ -252,16 +244,40 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   substepsol!(ts.sol₁, sol, ts.RHS₁, dt/2)
   equation.calcN!(ts.RHS₂, ts.sol₁, t+dt/2, clock, vars, params, grid)
   addlinearterm!(ts.RHS₂, equation.L, ts.sol₁)
+  for i in 1:size(ts.RHS₁, 1)
+    for j in 1:size(ts.RHS₁, 2)
+      @printf("RHS2[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₂[i, j]), imag(ts.RHS₂[i, j]))
+    end
+    @printf("\n")
+  end
+  @printf("\n\n")
+
   
   # Substep 3
   substepsol!(ts.sol₁, sol, ts.RHS₂, dt/2)
   equation.calcN!(ts.RHS₃, ts.sol₁, t+dt/2, clock, vars, params, grid)
   addlinearterm!(ts.RHS₃, equation.L, ts.sol₁)
+  for i in 1:size(ts.RHS₁, 1)
+    for j in 1:size(ts.RHS₁, 2)
+      @printf("RHS3[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₃[i, j]), imag(ts.RHS₃[i, j]))
+    end
+    @printf("\n")
+  end
+  @printf("\n\n")
+
   
   # Substep 4
   substepsol!(ts.sol₁, sol, ts.RHS₃, dt)
   equation.calcN!(ts.RHS₄, ts.sol₁, t+dt, clock, vars, params, grid)
   addlinearterm!(ts.RHS₄, equation.L, ts.sol₁)
+  for i in 1:size(ts.RHS₁, 1)
+    for j in 1:size(ts.RHS₁, 2)
+      @printf("RHS4[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₄[i, j]), imag(ts.RHS₄[i, j]))
+    end
+    @printf("\n")
+  end
+  @printf("\n\n")
+
   
   return nothing
 end
