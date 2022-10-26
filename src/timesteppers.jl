@@ -230,9 +230,10 @@ end
 function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   # Substep 1
   equation.calcN!(ts.RHS₁, sol, t, clock, vars, params, grid)
+  @printf("\nt: %1.5f", t)
   for i in 1:size(ts.RHS₁, 1)
     for j in 1:size(ts.RHS₁, 2)
-      @print("RHS[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
+      @printf("RHS[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
     end
     @printf("\n")
   end
@@ -241,7 +242,7 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   @printf("______________________________________After!!!!")
   for i in 1:size(ts.RHS₁, 1)
     for j in 1:size(ts.RHS₁, 2)
-      @print("RHS_A[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
+      @printf("RHS_A[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
     end
     @printf("\n")
   end
