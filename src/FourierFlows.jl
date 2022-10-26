@@ -58,6 +58,8 @@ export
   FilteredAB3TimeStepper,
   stepforward!,
   step_until!
+  Printf
+
 
 using
   CUDA,
