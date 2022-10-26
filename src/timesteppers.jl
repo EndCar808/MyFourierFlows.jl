@@ -217,6 +217,8 @@ end
 
 function addlinearterm!(RHS, L, sol)
   @. RHS += L*sol
+
+  @printf("THISHS WORKED!!!!!!!!!!")
   
   return nothing
 end
