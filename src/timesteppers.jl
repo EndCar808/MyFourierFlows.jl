@@ -234,7 +234,7 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   addlinearterm!(ts.RHS₁, equation.L, sol)
   for i in 1:size(ts.RHS₁, 1)
     for j in 1:size(ts.RHS₁, 2)
-      @printf("RHS1[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]))
+      @printf("RHS1[%i, %i]: %1.16f %1.16f -- (%i, %i)\n", i, j, real(ts.RHS₁[i, j]), imag(ts.RHS₁[i, j]), grid.k[i], grid.l[j])
     end
     @printf("\n")
   end
@@ -246,7 +246,7 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   addlinearterm!(ts.RHS₂, equation.L, ts.sol₁)
   for i in 1:size(ts.RHS₁, 1)
     for j in 1:size(ts.RHS₁, 2)
-      @printf("RHS2[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₂[i, j]), imag(ts.RHS₂[i, j]))
+      @printf("RHS2[%i, %i]: %1.16f %1.16f -- (%i, %i)\n", i, j, real(ts.RHS₂[i, j]), imag(ts.RHS₂[i, j]), grid.k[i], grid.l[j])
     end
     @printf("\n")
   end
@@ -259,7 +259,7 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   addlinearterm!(ts.RHS₃, equation.L, ts.sol₁)
   for i in 1:size(ts.RHS₁, 1)
     for j in 1:size(ts.RHS₁, 2)
-      @printf("RHS3[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₃[i, j]), imag(ts.RHS₃[i, j]))
+      @printf("RHS3[%i, %i]: %1.16f %1.16f -- (%i, %i)\n", i, j, real(ts.RHS₃[i, j]), imag(ts.RHS₃[i, j]), grid.k[i], grid.l[j])
     end
     @printf("\n")
   end
@@ -272,7 +272,7 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   addlinearterm!(ts.RHS₄, equation.L, ts.sol₁)
   for i in 1:size(ts.RHS₁, 1)
     for j in 1:size(ts.RHS₁, 2)
-      @printf("RHS4[%i, %i]: %1.16f %1.16f \n", i, j, real(ts.RHS₄[i, j]), imag(ts.RHS₄[i, j]))
+      @printf("RHS4[%i, %i]: %1.16f %1.16f -- (%i, %i)\n", i, j, real(ts.RHS₄[i, j]), imag(ts.RHS₄[i, j]), grid.k[i], grid.l[j])
     end
     @printf("\n")
   end
