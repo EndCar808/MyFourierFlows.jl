@@ -58,7 +58,6 @@ export
   FilteredAB3TimeStepper,
   stepforward!,
   step_until!
-  Printf
 
 
 using
@@ -68,7 +67,8 @@ using
   Statistics,
   Interpolations,
   Reexport,
-  DocStringExtensions
+  DocStringExtensions,
+  Printf
 
 @reexport using FFTW: fft, ifft, rfft, irfft
 
