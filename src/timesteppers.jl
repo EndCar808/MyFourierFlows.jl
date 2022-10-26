@@ -218,8 +218,6 @@ end
 function addlinearterm!(RHS, L, sol)
   @. RHS += L*sol
 
-  # @printf("THISHS WORKED!!!!!!!!!!")
-  
   return nothing
 end
 
@@ -233,6 +231,8 @@ function RK4substeps!(sol, clock, ts, equation, vars, params, grid, t, dt)
   # Substep 1
   equation.calcN!(ts.RHS₁, sol, t, clock, vars, params, grid)
   addlinearterm!(ts.RHS₁, equation.L, sol)
+  @printf("THISHS WORKED!!!!!!!!!!")
+
   
   # Substep 2
   substepsol!(ts.sol₁, sol, ts.RHS₁, dt/2)
